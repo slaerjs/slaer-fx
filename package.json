@@ -6,8 +6,8 @@
   "module": "src/index.js",
   "scripts": {
     "build": "npm run build:dev && npm run build:dist",
-    "build:dev": "webpack --env=dev --progress --profile --colors",
-    "build:dist": "webpack -p --env=prod --progress --profile --colors",
+    "build:dev": "webpack --config conf\\webpack.config.js --env=dev --progress --profile --colors",
+    "build:dist": "webpack --config conf\\webpack.config.js -p --env=prod --progress --profile --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [ "games", "engine", "graphics", "interactive", "browser" ],
