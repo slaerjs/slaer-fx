@@ -2,11 +2,12 @@
   "name": "slaerfx",
   "version": "0.0.0",
   "description": "SlaerFX - Engine",
-  "directories": {
-    "test": "test"
-  },
+  "main": "dist/slaerfx.js",
+  "module": "src/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "npm run build:dev && npm run build:dist",
+    "build:dev": "webpack --env=dev --progress --profile --colors",
+    "build:dist": "webpack -p --env=prod --progress --profile --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [ "games", "engine", "graphics", "interactive", "browser" ],
