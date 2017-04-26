@@ -1,7 +1,4 @@
 
-slaer.start();
-
-
 // Define an entity
 slaer.entity('bullet', {
   flyThroughTheAir: true
@@ -23,9 +20,13 @@ slaer.object({
   abc: 123
 });
 slaer.object({
-  abc: 123
+  abc: 456
 });
 
+slaer.behaviour('abc', function(opts) {
+  
+});
 
 console.log('E', slaer.entities());
 console.log('O', slaer.objects());
+console.log('B', slaer.behaviours());

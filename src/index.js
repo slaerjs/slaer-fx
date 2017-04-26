@@ -1,6 +1,6 @@
 
 /// The version number
-export const version = VERSION;
+//export const version = VERSION;
 
 // Export the api modules
 export * from './core/config';
@@ -16,7 +16,7 @@ import { start } from './core/engine';
 
 // Initialise the bootstrapper
 window.addEventListener('load', function() {
-  //if (config('autorun')) {
-  //  start();
-  //}
+  if (config('autorun')) {
+    start();
+  }
 });

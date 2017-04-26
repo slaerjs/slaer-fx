@@ -1,9 +1,12 @@
 
-export var behaviours = {};
+var instances = {};
 
 export function behaviour(name, inst) {
   
   inst._name = name;
   
-  return behaviours[name] = inst;
+  return instances[name] = inst;
+};
+export function behaviours() {
+  return instances;
 };

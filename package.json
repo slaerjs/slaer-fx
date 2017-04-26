@@ -5,15 +5,19 @@
   "main": "dist/slaerfx.js",
   "module": "src/index.js",
   "scripts": {
-    "build": "npm run build:dev && npm run build:dist",
-    "build:dev": "webpack --config conf\\webpack.config.js --env=dev --progress --profile --colors",
-    "build:dist": "webpack --config conf\\webpack.config.js -p --env=prod --progress --profile --colors",
+    "build": "rollup src/index.js --format umd --name slaer --output dist/slaerfx.js --sourcemap",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [ "games", "engine", "graphics", "interactive", "browser" ],
+  "keywords": [
+    "games",
+    "engine",
+    "graphics",
+    "interactive",
+    "browser"
+  ],
   "author": "Gary Doublé <garydouble@live.com>",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "2.4.1"
+    "rollup": "0.41.6"
   }
 }
