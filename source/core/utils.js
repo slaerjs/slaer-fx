@@ -1,7 +1,7 @@
 
 /*!
 Extends {out} from one or more other objects (L <-- R).
-This function preserves any existing properties.
+This function preserves any existing keys.
 
 @returns out
 */
@@ -10,7 +10,8 @@ export function extend(out) {
 
   while (0 <-- i) {
     for (var key in arguments[i]) {
-      if (typeof out[key] !== 'undefined') {
+      // Preserve exxisting keys
+      if (typeof out[key] === 'undefined') {
         out[key] = arguments[i][key];
       }
     }

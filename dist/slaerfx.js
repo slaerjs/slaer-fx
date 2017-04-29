@@ -22,7 +22,7 @@ function config(name) {
 
 /*!
 Extends {out} from one or more other objects (L <-- R).
-This function preserves any existing properties.
+This function preserves any existing keys.
 
 @returns out
 */
@@ -31,7 +31,8 @@ function extend(out) {
 
   while (0 <-- i) {
     for (var key in arguments[i]) {
-      if (typeof out[key] !== 'undefined') {
+      // Preserve exxisting keys
+      if (typeof out[key] === 'undefined') {
         out[key] = arguments[i][key];
       }
     }
@@ -84,7 +85,9 @@ function object(name, components) {
 function objects() {
   return SlaerObject.instances;
 }
-
+objects._reset = function() {
+   SlaerObject.instances = {};
+};
 
 //----------------------------------------------------------
 // INTERNALS
@@ -134,6 +137,9 @@ function entity(name, components) {
 function entities() {
   return SlaerEntity.instances;
 }
+entities._reset = function() {
+   SlaerEntity.instances = {};
+};
 
 
 //----------------------------------------------------------
@@ -150,7 +156,7 @@ function SlaerEntity(name, components) {
 SlaerEntity.instances = {};
 
 SlaerEntity.prototype.create = function(name, components) {
-  return object(name, extend({}, this.components, components));
+  return object(name, extend({}, this.components, components || {}));
 };
 
 var instances = {};
@@ -164,6 +170,9 @@ function behaviour(name, inst) {
 function behaviours() {
   return instances;
 }
+behaviours._reset = function() {
+   instances = {};
+};
 
 var runToken = null;
 
@@ -171,12 +180,10 @@ var runToken = null;
 Starts the engine.
 */
 function start() {
-  console.log('SlaerFX Engine is starting...');
-  
-  (function loop() {
-    var _objects = objects();
-    var _behaviours = behaviours();
+  var _objects = objects();
+  var _behaviours = behaviours();
 
+  (function loop() {
     for (var key in _objects) {
       for (var component in _objects[key].components) {
         if (typeof component === 'function') {
@@ -185,10 +192,13 @@ function start() {
         else if (_behaviours[component]) {
           _behaviours[component].call(_objects[key], _objects[key].components[component]);
         }
+        else {
+          console.warn('Unknown behaviour ' + component);
+        }
       }
     }
     
-    window.requestAnimationFrame(loop);
+    runToken = window.requestAnimationFrame(loop);
   }());
 }
 
@@ -197,6 +207,15 @@ Stops the engine running
 */
 function stop() {
   window.cancelAnimationFrame(runToken);
+}
+
+/*!
+Wipes the data and restarts the engine.
+*/
+function reset() {
+  objects._reset();
+  entities._reset();
+  behaviours._reset();
 }
 
 // Import the stuf we need
@@ -217,6 +236,7 @@ exports.behaviour = behaviour;
 exports.behaviours = behaviours;
 exports.start = start;
 exports.stop = stop;
+exports.reset = reset;
 exports.extend = extend;
 exports.merge = merge;
 exports.mergeExtend = mergeExtend;

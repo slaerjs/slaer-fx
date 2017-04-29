@@ -21,7 +21,9 @@ export function object(name, components) {
 export function objects() {
   return SlaerObject.instances;
 }
-
+objects._reset = function() {
+   SlaerObject.instances = {};
+}
 
 //----------------------------------------------------------
 // INTERNALS

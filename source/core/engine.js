@@ -1,6 +1,7 @@
 
 
 import { objects } from './objects';
+import { entities } from './entities';
 import { behaviours } from './behaviours';
 
 var runToken = null;
@@ -9,12 +10,10 @@ var runToken = null;
 Starts the engine.
 */
 export function start() {
-  console.log('SlaerFX Engine is starting...');
-  
-  (function loop() {
-    var _objects = objects();
-    var _behaviours = behaviours();
+  var _objects = objects();
+  var _behaviours = behaviours();
 
+  (function loop() {
     for (var key in _objects) {
       for (var component in _objects[key].components) {
         if (typeof component === 'function') {
@@ -23,10 +22,13 @@ export function start() {
         else if (_behaviours[component]) {
           _behaviours[component].call(_objects[key], _objects[key].components[component]);
         }
+        else {
+          console.warn('Unknown behaviour ' + component);
+        }
       }
     }
     
-    window.requestAnimationFrame(loop);
+    runToken = window.requestAnimationFrame(loop);
   }());
 }
 
@@ -35,4 +37,13 @@ Stops the engine running
 */
 export function stop() {
   window.cancelAnimationFrame(runToken);
+}
+
+/*!
+Wipes the data and restarts the engine.
+*/
+export function reset() {
+  objects._reset();
+  entities._reset();
+  behaviours._reset();
 }

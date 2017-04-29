@@ -30,6 +30,9 @@ export function entity(name, components) {
 export function entities() {
   return SlaerEntity.instances;
 }
+entities._reset = function() {
+   SlaerEntity.instances = {};
+}
 
 
 //----------------------------------------------------------
@@ -48,6 +51,6 @@ function SlaerEntity(name, components) {
 SlaerEntity.instances = {};
 
 SlaerEntity.prototype.create = function(name, components) {
-  return object(name, extend({}, this.components, components));
+  return object(name, extend({}, this.components, components || {}));
 };
 
