@@ -196,14 +196,15 @@ function start() {
 
     for (var key in _objects) {
       for (var component in _objects[key].components) {
+        if (component[0] === '_') {
+          continue;
+        }
+
         if (_behaviours[component]) {
           _behaviours[component].call(_objects[key], dt, _objects[key].components[component]);
         }
-        else if (typeof component === 'function') {
-          component.call(_objects[key], dt);
-        }
-        else {
-          console.warn('Unknown behaviour ' + component);
+        else if (typeof _objects[key].components[component] === 'function') {
+          _objects[key].components[component].call(_objects[key].components, dt);
         }
       }
     }
