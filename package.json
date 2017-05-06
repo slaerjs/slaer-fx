@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "rollup source/index.js --format umd --name slaer --output dist/slaerfx.js --sourcemap",
+    "postbuild": "npm test",
     "test": "jasmine JASMINE_CONFIG_PATH=conf/jasmine.json"
   },
   "keywords": [
