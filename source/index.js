@@ -2,7 +2,7 @@
 /// The version number
 //export const version = VERSION;
 
-// Export the api modules
+// Export the core api modules
 export * from './core/config';
 export * from './core/entities';
 export * from './core/objects';
@@ -10,7 +10,10 @@ export * from './core/behaviours';
 export * from './core/engine';
 export * from './core/utils';
 
-// Import the stuf we need
+// Export the rendering api modules
+export * from './rendering/surfaces'
+
+// Import the stuff we need for init
 import { config } from './core/config';
 import { start } from './core/engine';
 
