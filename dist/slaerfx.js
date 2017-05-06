@@ -190,10 +190,6 @@ function start() {
     now = new Date().getTime();
     dt = Math.min((now - then) / 1000.0, 0.1);
 
-    var canvas = document.getElementsByTagName('canvas')[0];
-    canvas.width = canvas.width;
-    canvas.height = canvas.height;
-
     for (var key in _objects) {
       for (var component in _objects[key].components) {
         if (component[0] === '_') {
@@ -271,15 +267,29 @@ function SlaerSurface(components) {
     components.resolution = [components.resolution, components.resolution];
   }
 
-  this._canvas.width = window.innerWidth * components.resolution[0];
-  this._canvas.height = window.innerHeight * components.resolution[1];
+  this._resolution = components.resolution;
+
+  this.resize([window.innerWidth, window.innerHeight], components.resolution);
 
   document.body.appendChild(this._canvas);
 
   this._ctx = this._canvas.getContext('2d');
+
+  SlaerSurface.instances.push(this);
 }
 
-SlaerSurface.instances = {};
+SlaerSurface.prototype.resize = function(size, res) {
+  this._canvas.width = size[0] * res[0];
+  this._canvas.height = size[1] * res[1];
+};
+
+SlaerSurface.instances = [];
+
+window.addEventListener('resize', function() {
+  for (var i = 0, N = SlaerSurface.instances.length; i < N; i++) {
+    SlaerSurface.instances[i].resize([window.innerWidth, window.innerHeight], SlaerSurface.instances[i]._resolution);
+  }
+});
 
 // Import the stuff we need for init
 // Initialise the bootstrapper

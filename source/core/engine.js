@@ -20,10 +20,6 @@ export function start() {
     now = new Date().getTime();
     dt = Math.min((now - then) / 1000.0, 0.1);
 
-    var canvas = document.getElementsByTagName('canvas')[0];
-    canvas.width = canvas.width;
-    canvas.height = canvas.height;
-
     for (var key in _objects) {
       for (var component in _objects[key].components) {
         if (component[0] === '_') {
