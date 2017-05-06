@@ -29,6 +29,7 @@ This function preserves any existing keys.
 function extend(out) {
   var i = arguments.length;
 
+
   while (0 <-- i) {
     for (var key in arguments[i]) {
       // Preserve exxisting keys
@@ -167,9 +168,11 @@ function behaviour(name, inst) {
   
   return instances[name] = inst;
 }
+
 function behaviours() {
   return instances;
 }
+
 behaviours._reset = function() {
    instances = {};
 };
@@ -225,21 +228,14 @@ function reset() {
   behaviours._reset();
 }
 
-// Annonymous surface counter
-var annonymous$2 = 0;
-
 function surface(components) {
-  if (name && typeof name !== 'string') {
-    components = name;
-    name = "surface#" + annonymous$2++;
-  }
-
-  return new SlaerSurface();
+  return new SlaerSurface(components);
 }
 
 //----------------------------------------------------------
 // INTERNALS
 //----------------------------------------------------------
+
 
 function SlaerSurface(components) {
   components = components || {};

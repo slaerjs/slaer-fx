@@ -25,7 +25,7 @@ export function entity(name, components) {
   }
 
   return inst;
-};
+}
 
 export function entities() {
   return SlaerEntity.instances;

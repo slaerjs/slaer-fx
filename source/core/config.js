@@ -5,7 +5,7 @@ var settings = {
 
 export function configure(name, value) {
     settings[name] = value;
-};
+}
 
 export function config(name) {
     if (name) {
@@ -13,5 +13,4 @@ export function config(name) {
     }
     
     return settings;
-};
-
+}

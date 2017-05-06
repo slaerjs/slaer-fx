@@ -1,19 +1,13 @@
 
-// Annonymous surface counter
-var annonymous = 0;
 
 export function surface(components) {
-  if (name && typeof name !== 'string') {
-    components = name;
-    name = "surface#" + annonymous++;
-  }
-
-  return new SlaerSurface();
+  return new SlaerSurface(components);
 }
 
 //----------------------------------------------------------
 // INTERNALS
 //----------------------------------------------------------
+
 
 function SlaerSurface(components) {
   components = components || {};

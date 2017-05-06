@@ -8,6 +8,7 @@ This function preserves any existing keys.
 export function extend(out) {
   var i = arguments.length;
 
+
   while (0 <-- i) {
     for (var key in arguments[i]) {
       // Preserve exxisting keys
@@ -18,7 +19,7 @@ export function extend(out) {
   }
 
   return out;
-};
+}
 
 /*!
 Merges one or more objects over {out} (L --> R)
@@ -34,7 +35,7 @@ export function merge(out) {
   }
 
   return out;
-};
+}
 
 /*!
 Extends an object based on the results from a merge operation.

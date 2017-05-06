@@ -16,7 +16,7 @@ export function object(name, components) {
   }
 
   return inst;
-};
+}
 
 export function objects() {
   return SlaerObject.instances;
