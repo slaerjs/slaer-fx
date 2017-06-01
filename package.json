@@ -13,7 +13,7 @@
     "prebuild": "npm run lint",
     "build": "rollup source/index.js --format umd --name slaer --output dist/slaerfx.js --sourcemap",
     "postbuild": "npm test",
-    "test": "jasmine JASMINE_CONFIG_PATH=conf/jasmine.json",
+    "test": "node ./test",
     "watch": "watch \"npm run build\" source/",
 
     "start": "npm run watch"
@@ -31,7 +31,6 @@
   "devDependencies": {
     "babel-eslint": "7.2.3",
     "eslint": "3.19.0",
-    "jasmine": "2.6.0",
     "jsdom": "10.0.0",
     "rollup": "0.41.6",
     "watch": "1.0.2"

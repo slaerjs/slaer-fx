@@ -1,9 +1,8 @@
 /*!
-This file setups up a browser environment
-that is used during the test suite.
+This file setups up a fake browser environment
+and runs a few work-in-progress tests / experiments.
 */
 var jsdom = require('jsdom').JSDOM;
-
 var dom = new jsdom('');
 
 global.window = dom.window;
@@ -15,3 +14,4 @@ window.requestAnimationFrame = window.requestAnimationFrame || function(fn) {
 window.cancelAnimationFrame = window.requestAnimationFrame || function(cancellationToken) {
   return cancelTimeout(cancellationToken);
 }
+
