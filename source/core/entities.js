@@ -51,6 +51,8 @@ function SlaerEntity(name, components) {
 SlaerEntity.instances = {};
 
 SlaerEntity.prototype.create = function(name, components) {
-  return object(name, extend({}, this.components, components || {}));
+  var template = typeof this.components === 'function' ? this.components() : this.components;
+
+  return object(name, extend({}, template, components || {}));
 };
 
