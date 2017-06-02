@@ -3,6 +3,7 @@ var settings = {
   autorun: true
 };
 
+
 export function configure(name, value) {
     settings[name] = value;
 }

@@ -1,17 +1,17 @@
 
-var instances = {};
+import { app } from './app';
 
-export function behaviour(name, inst) {
-  
-  inst._name = name;
-  
-  return instances[name] = inst;
+app.behaviours = {};
+
+export function behaviour(id, factory) {
+  return app.behaviours[id] = new SlaerBehavior(id, factory);
 }
 
 export function behaviours() {
-  return instances;
+  return Object.keys(app.behaviours).map(function(id) { return app.behaviours[id] });
 }
 
-behaviours._reset = function() {
-   instances = {};
-};
+function SlaerBehavior(id, factory) {
+  this.id = id;
+  this.exec = factory(app);
+}
